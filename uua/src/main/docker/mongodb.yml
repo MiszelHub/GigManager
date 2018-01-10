@@ -7,7 +7,5 @@ services:
         # volumes:
         #     - ~/volumes/jhipster/uua/mongodb/:/data/db/
         volumes:
-          - uaa-mongo-vol:/mnt/KubernetesVolume/uaa-mongo-vol
-volumes:
-  uaa-mongo-vol:
+          - /mnt/KubernetesVolume/uaa-mongo-vol
 
