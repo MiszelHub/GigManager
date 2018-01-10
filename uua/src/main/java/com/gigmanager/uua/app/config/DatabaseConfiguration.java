@@ -24,42 +24,42 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import java.util.ArrayList;
 import java.util.List;
 
-@Configuration
-@Profile("!" + JHipsterConstants.SPRING_PROFILE_CLOUD)
-@EnableMongoRepositories("com.gigmanager.uua.app.repository")
-@Import(value = MongoAutoConfiguration.class)
-@EnableMongoAuditing(auditorAwareRef = "springSecurityAuditorAware")
-public class DatabaseConfiguration {
-
-    private final Logger log = LoggerFactory.getLogger(DatabaseConfiguration.class);
-
-    @Bean
-    public ValidatingMongoEventListener validatingMongoEventListener() {
-        return new ValidatingMongoEventListener(validator());
-    }
-
-    @Bean
-    public LocalValidatorFactoryBean validator() {
-        return new LocalValidatorFactoryBean();
-    }
-
-    @Bean
-    public CustomConversions customConversions() {
-        List<Converter<?, ?>> converters = new ArrayList<>();
-        converters.add(DateToZonedDateTimeConverter.INSTANCE);
-        converters.add(ZonedDateTimeToDateConverter.INSTANCE);
-        return new CustomConversions(converters);
-    }
-
-    @Bean
-    public Mongobee mongobee(MongoClient mongoClient, MongoTemplate mongoTemplate, MongoProperties mongoProperties) {
-        log.debug("Configuring Mongobee");
-        Mongobee mongobee = new Mongobee(mongoClient);
-        mongobee.setDbName(mongoProperties.getDatabase());
-        mongobee.setMongoTemplate(mongoTemplate);
-        // package to scan for migrations
-        mongobee.setChangeLogsScanPackage("com.gigmanager.uua.app.config.dbmigrations");
-        mongobee.setEnabled(true);
-        return mongobee;
-    }
-}
+//@Configuration
+//@Profile("!" + JHipsterConstants.SPRING_PROFILE_CLOUD)
+//@EnableMongoRepositories("com.gigmanager.uua.app.repository")
+//@Import(value = MongoAutoConfiguration.class)
+////@EnableMongoAuditing(auditorAwareRef = "springSecurityAuditorAware")
+//public class DatabaseConfiguration {
+////
+//////    private final Logger log = LoggerFactory.getLogger(DatabaseConfiguration.class);
+//////
+//////    @Bean
+//////    public ValidatingMongoEventListener validatingMongoEventListener() {
+//////        return new ValidatingMongoEventListener(validator());
+//////    }
+//////
+//////    @Bean
+//////    public LocalValidatorFactoryBean validator() {
+//////        return new LocalValidatorFactoryBean();
+//////    }
+//////
+//////    @Bean
+//////    public CustomConversions customConversions() {
+//////        List<Converter<?, ?>> converters = new ArrayList<>();
+//////        converters.add(DateToZonedDateTimeConverter.INSTANCE);
+//////        converters.add(ZonedDateTimeToDateConverter.INSTANCE);
+//////        return new CustomConversions(converters);
+//////    }
+////////
+////////    @Bean
+////////    public Mongobee mongobee(MongoClient mongoClient, MongoTemplate mongoTemplate, MongoProperties mongoProperties) {
+////////        log.debug("Configuring Mongobee");
+////////        Mongobee mongobee = new Mongobee(mongoClient);
+////////        mongobee.setDbName(mongoProperties.getDatabase());
+////////        mongobee.setMongoTemplate(mongoTemplate);
+////////        // package to scan for migrations
+////////        mongobee.setChangeLogsScanPackage("com.gigmanager.uua.app.config.dbmigrations");
+////////        mongobee.setEnabled(true);
+////////        return mongobee;
+////////    }
+//}
