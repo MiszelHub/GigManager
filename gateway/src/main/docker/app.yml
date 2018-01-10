@@ -3,7 +3,7 @@ services:
     gateway-app:
         image: gateway
         volumes:
-          - gateway-vol:/mnt/KubernetesVolume/gateway-vol
+          - /mnt/KubernetesVolume/gateway-vol
         environment:
             - SPRING_PROFILES_ACTIVE=prod,swagger
             - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/eureka
@@ -24,5 +24,4 @@ services:
 #        environment:
 #            - SPRING_CLOUD_CONFIG_SERVER_NATIVE_SEARCH_LOCATIONS=file:./central-config/docker-config/
 
-volumes:
-  gateway:
+
