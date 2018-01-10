@@ -5,10 +5,10 @@ services:
         volumes:
           - /mnt/KubernetesVolume/gateway-vol
         environment:
-            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_PROFILES_ACTIVE=dev,swagger
             - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/eureka
             - SPRING_CLOUD_CONFIG_URI=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/config
-            - SPRING_DATA_MONGODB_URI=mongodb://gateway-mongodb:27017
+            - SPRING_DATA_MONGODB_URI=mongodb://gateway-mongodb:27018
             - SPRING_DATA_MONGODB_DATABASE=gateway
             - JHIPSTER_SLEEP=30 # gives time for the JHipster Registry to boot before the application
         ports:
