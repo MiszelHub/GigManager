@@ -13,10 +13,10 @@ services:
             - JHIPSTER_SLEEP=30 # gives time for the JHipster Registry to boot before the application
         ports:
             - 8080:8080
-#    gateway-mongodb:
-#        extends:
-#            file: mongodb.yml
-#            service: gateway-mongodb
+    gateway-mongodb:
+        extends:
+            file: mongodb.yml
+            service: gateway-mongodb
 #    jhipster-registry:
 #        extends:
 #            file: jhipster-registry.yml
