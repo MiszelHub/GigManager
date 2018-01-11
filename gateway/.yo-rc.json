@@ -34,6 +34,17 @@
     "languages": [
       "en",
       "pl"
-    ]
+    ],
+    "appsFolders": [
+      "AccountService",
+      "gateway",
+      "uua"
+    ],
+    "directoryPath": "../",
+    "jwtSecretKey": "de363a9c14a8816e4df082324a1b120f1a9cf877",
+    "dockerRepositoryName": "miszel66",
+    "dockerPushCommand": "docker push",
+    "kubernetesNamespace": "default",
+    "kubernetesServiceType": "LoadBalancer"
   }
 }

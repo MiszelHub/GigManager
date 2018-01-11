@@ -1,0 +1,34 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: uua-mongodb
+  namespace: default
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: uua-mongodb
+    spec:
+      volumes:
+      - name: data
+        emptyDir: {}
+      containers:
+      - name: mongo
+        image: mongo:3.4.8
+        ports:
+        - containerPort: 27017
+        volumeMounts:
+        - name: data
+          mountPath: /data/db/
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: uua-mongodb
+  namespace: default
+spec:
+  selector:
+    app: uua-mongodb
+  ports:
+  - port: 27017
