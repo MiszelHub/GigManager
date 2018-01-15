@@ -1,4 +1,4 @@
-package com.gigmanager.gateway.app.config;
+package com.gigmanager.gateway.config;
 
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.servlet.InstrumentedFilter;
@@ -71,7 +71,7 @@ public class WebConfigurerTest {
         env = new MockEnvironment();
         props = new JHipsterProperties();
 
-       // webConfigurer = new WebConfigurer(env, props, new MockHazelcastInstance());
+        webConfigurer = new WebConfigurer(env, props, new MockHazelcastInstance());
         metricRegistry = new MetricRegistry();
         webConfigurer.setMetricRegistry(metricRegistry);
     }

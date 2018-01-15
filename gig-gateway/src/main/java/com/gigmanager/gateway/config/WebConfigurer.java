@@ -1,4 +1,4 @@
-package com.gigmanager.gateway.app.config;
+package com.gigmanager.gateway.config;
 
 import io.github.jhipster.config.JHipsterConstants;
 import io.github.jhipster.config.JHipsterProperties;
@@ -40,15 +40,15 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
 
     private final JHipsterProperties jHipsterProperties;
 
-    //private final HazelcastInstance hazelcastInstance;
+    private final HazelcastInstance hazelcastInstance;
 
     private MetricRegistry metricRegistry;
 
-    public WebConfigurer(Environment env, JHipsterProperties jHipsterProperties) {
+    public WebConfigurer(Environment env, JHipsterProperties jHipsterProperties, HazelcastInstance hazelcastInstance) {
 
         this.env = env;
         this.jHipsterProperties = jHipsterProperties;
-        //this.hazelcastInstance = hazelcastInstance;
+        this.hazelcastInstance = hazelcastInstance;
     }
 
     @Override
