@@ -9,9 +9,9 @@ services:
             - JHIPSTER_SLEEP=30 # gives time for the JHipster Registry to boot before the application
         ports:
             - 8080:8080
-    jhipster-registry:
-        extends:
-            file: jhipster-registry.yml
-            service: jhipster-registry
-        environment:
-            - SPRING_CLOUD_CONFIG_SERVER_NATIVE_SEARCH_LOCATIONS=file:./central-config/docker-config/
+#    jhipster-registry:
+#        extends:
+#            file: jhipster-registry.yml
+#            service: jhipster-registry
+#        environment:
+#            - SPRING_CLOUD_CONFIG_SERVER_NATIVE_SEARCH_LOCATIONS=file:./central-config/docker-config/
