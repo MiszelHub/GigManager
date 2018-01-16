@@ -12,6 +12,8 @@ services:
             - SPRING_DATA_MONGODB_URI=mongodb://uua-mongodb:27018
             - SPRING_DATA_MONGODB_DATABASE=uua
             - JHIPSTER_SLEEP=30 # gives time for the JHipster Registry to boot before the application
+        ports:
+           - 9999:9999
     uua-mongodb:
         extends:
             file: mongodb.yml
