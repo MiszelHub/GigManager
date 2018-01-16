@@ -3,7 +3,7 @@ services:
     uua-mongodb:
         image: mongo:3.4.8
         ports:
-            - "27017:27017"
+            - "27018:27017"
         # volumes:
         #     - ~/volumes/jhipster/uua/mongodb/:/data/db/
         volumes:

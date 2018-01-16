@@ -25,10 +25,10 @@ spring:
         restart:
             enabled: false
         livereload:
-            enabled: false
+            enabled: falsWe
     data:
         mongodb:
-            uri: mongodb://localhost:27017
+            uri: mongodb://localhost:27018
             database: uua
     mail:
         host: localhost
