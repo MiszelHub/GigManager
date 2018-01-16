@@ -19,6 +19,7 @@ public class UaaProperties {
 
     public WebClientConfiguration getWebClientConfiguration() {
         return webClientConfiguration;
+
     }
 
     /**
