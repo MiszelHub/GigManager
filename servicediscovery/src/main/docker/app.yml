@@ -1,0 +1,8 @@
+version: '2'
+
+services:
+  servicediscovery-app:
+     build: .
+     image: servicediscovery
+     ports:
+        - 8761:8761
