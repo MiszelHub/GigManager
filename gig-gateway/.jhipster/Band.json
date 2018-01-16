@@ -1,0 +1,51 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "minlength",
+                "maxlength"
+            ],
+            "fieldValidateRulesMinlength": "1",
+            "fieldValidateRulesMaxlength": "100"
+        },
+        {
+            "fieldName": "musicGenre",
+            "fieldType": "Genre",
+            "fieldValues": "Rock,HardRock,HeavyMetal,DeathMetal,BlackMetal,BrutalDeathMetal",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "origin",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "siteUrl",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "pattern"
+            ],
+            "fieldValidateRulesPattern": "^(?:http(s)?:\\/\\/)?[\\w.-]+(?:\\.[\\w\\.-]+)+[\\w\\-\\._~:/?#[\\]@!\\$&'\\(\\)\\*\\+,;=.]+$"
+        },
+        {
+            "fieldName": "dateOfFormation",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "band",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination",
+    "microserviceName": "gigservice",
+    "searchEngine": false
+}

@@ -1,0 +1,87 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myBandLabel" jhiTranslate="giggatewayApp.band.home.createOrEditLabel">Create or edit a Band</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!band.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="band.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="giggatewayApp.band.name" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                [(ngModel)]="band.name" required minlength="1" maxlength="100" />
+            <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.name?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 1 }">
+                   This field is required to be at least 1 characters.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.name?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 100 }">
+                   This field cannot be longer than 100 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="giggatewayApp.band.musicGenre" for="field_musicGenre">Music Genre</label>
+            <input type="text" class="form-control" name="musicGenre" id="field_musicGenre"
+                [(ngModel)]="band.musicGenre" required />
+            <div [hidden]="!(editForm.controls.musicGenre?.dirty && editForm.controls.musicGenre?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.musicGenre?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="giggatewayApp.band.origin" for="field_origin">Origin</label>
+            <input type="text" class="form-control" name="origin" id="field_origin"
+                [(ngModel)]="band.origin"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="giggatewayApp.band.siteUrl" for="field_siteUrl">Site Url</label>
+            <input type="text" class="form-control" name="siteUrl" id="field_siteUrl"
+                [(ngModel)]="band.siteUrl" pattern="^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$" />
+            <div [hidden]="!(editForm.controls.siteUrl?.dirty && editForm.controls.siteUrl?.invalid)">
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.siteUrl?.errors?.pattern" jhiTranslate="entity.validation.pattern" translateValues="{ pattern: 'Site Url' }">
+                    This field should follow pattern for "Site Url".
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="giggatewayApp.band.dateOfFormation" for="field_dateOfFormation">Date Of Formation</label>
+            <div class="input-group">
+                <input id="field_dateOfFormation" type="text" class="form-control" name="dateOfFormation" ngbDatepicker  #dateOfFormationDp="ngbDatepicker" [(ngModel)]="band.dateOfFormation"
+                required/>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-secondary" (click)="dateOfFormationDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+            <div [hidden]="!(editForm.controls.dateOfFormation?.dirty && editForm.controls.dateOfFormation?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.dateOfFormation?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

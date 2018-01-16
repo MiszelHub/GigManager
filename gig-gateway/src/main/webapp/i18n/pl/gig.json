@@ -1,0 +1,30 @@
+{
+    "giggatewayApp": {
+        "gig" : {
+            "home": {
+                "title": "Gigs",
+                "createLabel": "Dodaj Gig",
+                "createOrEditLabel": "Dodaj lub edytuj: Gig"
+            },
+            "delete": {
+                "question": "Czy na pewno chcesz usunąć Gig {{ id }}?"
+            },
+            "detail": {
+                "title": "Gig"
+            },
+            "startDate": "Start Date",
+            "name": "Name",
+            "isCancelled": "Is Cancelled",
+            "description": "Description",
+            "ticketPrice": "Ticket Price",
+            "stageName": "Stage Name"
+        }
+    },
+    "gigserviceApp": {
+        "gig" : {
+            "created": "Utworzono nowy Gig z identyfikatorem {{ param }}",
+            "updated": "Uaktualniono Gig z identyfikatorem {{ param }}",
+            "deleted": "Usunięto Gig z identyfikatorem {{ param }}"
+        }
+    }
+}
