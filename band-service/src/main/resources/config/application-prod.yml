@@ -33,7 +33,7 @@ spring:
             port: 8500
     data:
         mongodb:
-            uri: mongodb://localhost:27017
+            uri: mongodb://localhost:27019
             database: bandservice
     mail:
         host: localhost

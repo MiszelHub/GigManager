@@ -2,7 +2,8 @@ version: '2'
 services:
     bandservice-mongodb:
         image: mongo:3.4.10
+        command: mongod --port 27019
         ports:
-            - "27017:27017"
+            - "27019:27019"
         # volumes:
         #     - ~/volumes/jhipster/bandservice/mongodb/:/data/db/
