@@ -1,0 +1,28 @@
+{
+    "gatewayApp": {
+        "gig" : {
+            "home": {
+                "title": "Gigs",
+                "createLabel": "Create a new Gig",
+                "createOrEditLabel": "Create or edit a Gig"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Gig {{ id }}?"
+            },
+            "detail": {
+                "title": "Gig"
+            },
+            "name": "Name",
+            "startDate": "Start Date",
+            "isCancelled": "Is Cancelled",
+            "ticketPrice": "Ticket Price"
+        }
+    },
+    "gigserviceApp": {
+        "gig" : {
+            "created": "A new Gig is created with identifier {{ param }}",
+            "updated": "A Gig is updated with identifier {{ param }}",
+            "deleted": "A Gig is deleted with identifier {{ param }}"
+        }
+    }
+}
