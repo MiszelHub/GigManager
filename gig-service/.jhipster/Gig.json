@@ -10,19 +10,26 @@
             ]
         },
         {
-            "fieldName": "startDate",
-            "fieldType": "ZonedDateTime",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
             "fieldName": "isCancelled",
             "fieldType": "Boolean"
         },
         {
             "fieldName": "ticketPrice",
             "fieldType": "BigDecimal",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "startDate",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "startTime",
+            "fieldType": "Instant",
             "fieldValidateRules": [
                 "required"
             ]

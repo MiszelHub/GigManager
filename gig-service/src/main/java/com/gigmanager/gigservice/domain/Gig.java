@@ -7,7 +7,8 @@ import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.ZonedDateTime;
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Objects;
 
 /**
@@ -25,16 +26,20 @@ public class Gig implements Serializable {
     @Field("name")
     private String name;
 
-    @NotNull
-    @Field("start_date")
-    private ZonedDateTime startDate;
-
     @Field("is_cancelled")
     private Boolean isCancelled;
 
     @NotNull
     @Field("ticket_price")
     private BigDecimal ticketPrice;
+
+    @NotNull
+    @Field("start_date")
+    private LocalDate startDate;
+
+    @NotNull
+    @Field("start_time")
+    private Instant startTime;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public String getId() {
@@ -56,19 +61,6 @@ public class Gig implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public ZonedDateTime getStartDate() {
-        return startDate;
-    }
-
-    public Gig startDate(ZonedDateTime startDate) {
-        this.startDate = startDate;
-        return this;
-    }
-
-    public void setStartDate(ZonedDateTime startDate) {
-        this.startDate = startDate;
     }
 
     public Boolean isIsCancelled() {
@@ -95,6 +87,32 @@ public class Gig implements Serializable {
 
     public void setTicketPrice(BigDecimal ticketPrice) {
         this.ticketPrice = ticketPrice;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public Gig startDate(LocalDate startDate) {
+        this.startDate = startDate;
+        return this;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public Instant getStartTime() {
+        return startTime;
+    }
+
+    public Gig startTime(Instant startTime) {
+        this.startTime = startTime;
+        return this;
+    }
+
+    public void setStartTime(Instant startTime) {
+        this.startTime = startTime;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -123,9 +141,10 @@ public class Gig implements Serializable {
         return "Gig{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
-            ", startDate='" + getStartDate() + "'" +
             ", isCancelled='" + isIsCancelled() + "'" +
             ", ticketPrice=" + getTicketPrice() +
+            ", startDate='" + getStartDate() + "'" +
+            ", startTime='" + getStartTime() + "'" +
             "}";
     }
 }

@@ -23,13 +23,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.Instant;
-import java.time.ZonedDateTime;
-import java.time.ZoneOffset;
 import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
-import static com.gigmanager.gigservice.web.rest.TestUtil.sameInstant;
 import static com.gigmanager.gigservice.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
@@ -48,14 +47,17 @@ public class GigResourceIntTest {
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
-    private static final ZonedDateTime DEFAULT_START_DATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
-    private static final ZonedDateTime UPDATED_START_DATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
-
     private static final Boolean DEFAULT_IS_CANCELLED = false;
     private static final Boolean UPDATED_IS_CANCELLED = true;
 
     private static final BigDecimal DEFAULT_TICKET_PRICE = new BigDecimal(1);
     private static final BigDecimal UPDATED_TICKET_PRICE = new BigDecimal(2);
+
+    private static final LocalDate DEFAULT_START_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_START_DATE = LocalDate.now(ZoneId.systemDefault());
+
+    private static final Instant DEFAULT_START_TIME = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_START_TIME = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     @Autowired
     private GigRepository gigRepository;
@@ -96,9 +98,10 @@ public class GigResourceIntTest {
     public static Gig createEntity() {
         Gig gig = new Gig()
             .name(DEFAULT_NAME)
-            .startDate(DEFAULT_START_DATE)
             .isCancelled(DEFAULT_IS_CANCELLED)
-            .ticketPrice(DEFAULT_TICKET_PRICE);
+            .ticketPrice(DEFAULT_TICKET_PRICE)
+            .startDate(DEFAULT_START_DATE)
+            .startTime(DEFAULT_START_TIME);
         return gig;
     }
 
@@ -123,9 +126,10 @@ public class GigResourceIntTest {
         assertThat(gigList).hasSize(databaseSizeBeforeCreate + 1);
         Gig testGig = gigList.get(gigList.size() - 1);
         assertThat(testGig.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testGig.getStartDate()).isEqualTo(DEFAULT_START_DATE);
         assertThat(testGig.isIsCancelled()).isEqualTo(DEFAULT_IS_CANCELLED);
         assertThat(testGig.getTicketPrice()).isEqualTo(DEFAULT_TICKET_PRICE);
+        assertThat(testGig.getStartDate()).isEqualTo(DEFAULT_START_DATE);
+        assertThat(testGig.getStartTime()).isEqualTo(DEFAULT_START_TIME);
     }
 
     @Test
@@ -164,6 +168,23 @@ public class GigResourceIntTest {
     }
 
     @Test
+    public void checkTicketPriceIsRequired() throws Exception {
+        int databaseSizeBeforeTest = gigRepository.findAll().size();
+        // set the field null
+        gig.setTicketPrice(null);
+
+        // Create the Gig, which fails.
+
+        restGigMockMvc.perform(post("/api/gigs")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(gig)))
+            .andExpect(status().isBadRequest());
+
+        List<Gig> gigList = gigRepository.findAll();
+        assertThat(gigList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
     public void checkStartDateIsRequired() throws Exception {
         int databaseSizeBeforeTest = gigRepository.findAll().size();
         // set the field null
@@ -181,10 +202,10 @@ public class GigResourceIntTest {
     }
 
     @Test
-    public void checkTicketPriceIsRequired() throws Exception {
+    public void checkStartTimeIsRequired() throws Exception {
         int databaseSizeBeforeTest = gigRepository.findAll().size();
         // set the field null
-        gig.setTicketPrice(null);
+        gig.setStartTime(null);
 
         // Create the Gig, which fails.
 
@@ -208,9 +229,10 @@ public class GigResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(gig.getId())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].startDate").value(hasItem(sameInstant(DEFAULT_START_DATE))))
             .andExpect(jsonPath("$.[*].isCancelled").value(hasItem(DEFAULT_IS_CANCELLED.booleanValue())))
-            .andExpect(jsonPath("$.[*].ticketPrice").value(hasItem(DEFAULT_TICKET_PRICE.intValue())));
+            .andExpect(jsonPath("$.[*].ticketPrice").value(hasItem(DEFAULT_TICKET_PRICE.intValue())))
+            .andExpect(jsonPath("$.[*].startDate").value(hasItem(DEFAULT_START_DATE.toString())))
+            .andExpect(jsonPath("$.[*].startTime").value(hasItem(DEFAULT_START_TIME.toString())));
     }
 
     @Test
@@ -224,9 +246,10 @@ public class GigResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(gig.getId()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.startDate").value(sameInstant(DEFAULT_START_DATE)))
             .andExpect(jsonPath("$.isCancelled").value(DEFAULT_IS_CANCELLED.booleanValue()))
-            .andExpect(jsonPath("$.ticketPrice").value(DEFAULT_TICKET_PRICE.intValue()));
+            .andExpect(jsonPath("$.ticketPrice").value(DEFAULT_TICKET_PRICE.intValue()))
+            .andExpect(jsonPath("$.startDate").value(DEFAULT_START_DATE.toString()))
+            .andExpect(jsonPath("$.startTime").value(DEFAULT_START_TIME.toString()));
     }
 
     @Test
@@ -247,9 +270,10 @@ public class GigResourceIntTest {
         Gig updatedGig = gigRepository.findOne(gig.getId());
         updatedGig
             .name(UPDATED_NAME)
-            .startDate(UPDATED_START_DATE)
             .isCancelled(UPDATED_IS_CANCELLED)
-            .ticketPrice(UPDATED_TICKET_PRICE);
+            .ticketPrice(UPDATED_TICKET_PRICE)
+            .startDate(UPDATED_START_DATE)
+            .startTime(UPDATED_START_TIME);
 
         restGigMockMvc.perform(put("/api/gigs")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -261,9 +285,10 @@ public class GigResourceIntTest {
         assertThat(gigList).hasSize(databaseSizeBeforeUpdate);
         Gig testGig = gigList.get(gigList.size() - 1);
         assertThat(testGig.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testGig.getStartDate()).isEqualTo(UPDATED_START_DATE);
         assertThat(testGig.isIsCancelled()).isEqualTo(UPDATED_IS_CANCELLED);
         assertThat(testGig.getTicketPrice()).isEqualTo(UPDATED_TICKET_PRICE);
+        assertThat(testGig.getStartDate()).isEqualTo(UPDATED_START_DATE);
+        assertThat(testGig.getStartTime()).isEqualTo(UPDATED_START_TIME);
     }
 
     @Test

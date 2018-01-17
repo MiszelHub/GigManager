@@ -63,7 +63,9 @@ export class GigService {
     private convertItemFromServer(json: any): Gig {
         const entity: Gig = Object.assign(new Gig(), json);
         entity.startDate = this.dateUtils
-            .convertDateTimeFromServer(json.startDate);
+            .convertLocalDateFromServer(json.startDate);
+        entity.startTime = this.dateUtils
+            .convertDateTimeFromServer(json.startTime);
         return entity;
     }
 
@@ -72,8 +74,10 @@ export class GigService {
      */
     private convert(gig: Gig): Gig {
         const copy: Gig = Object.assign({}, gig);
+        copy.startDate = this.dateUtils
+            .convertLocalDateToServer(gig.startDate);
 
-        copy.startDate = this.dateUtils.toDate(gig.startDate);
+        copy.startTime = this.dateUtils.toDate(gig.startTime);
         return copy;
     }
 }

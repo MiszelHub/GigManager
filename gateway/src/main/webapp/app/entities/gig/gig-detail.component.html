@@ -8,10 +8,6 @@
         <dd>
             <span>{{gig.name}}</span>
         </dd>
-        <dt><span jhiTranslate="gatewayApp.gig.startDate">Start Date</span></dt>
-        <dd>
-            <span>{{gig.startDate | date:'medium'}}</span>
-        </dd>
         <dt><span jhiTranslate="gatewayApp.gig.isCancelled">Is Cancelled</span></dt>
         <dd>
             <span>{{gig.isCancelled}}</span>
@@ -19,6 +15,14 @@
         <dt><span jhiTranslate="gatewayApp.gig.ticketPrice">Ticket Price</span></dt>
         <dd>
             <span>{{gig.ticketPrice}}</span>
+        </dd>
+        <dt><span jhiTranslate="gatewayApp.gig.startDate">Start Date</span></dt>
+        <dd>
+            <span>{{gig.startDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="gatewayApp.gig.startTime">Start Time</span></dt>
+        <dd>
+            <span>{{gig.startTime | date:'medium'}}</span>
         </dd>
     </dl>
 

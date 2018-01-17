@@ -13,9 +13,10 @@
                 "title": "Gig"
             },
             "name": "Name",
-            "startDate": "Start Date",
             "isCancelled": "Is Cancelled",
-            "ticketPrice": "Ticket Price"
+            "ticketPrice": "Ticket Price",
+            "startDate": "Start Date",
+            "startTime": "Start Time"
         }
     },
     "gigserviceApp": {

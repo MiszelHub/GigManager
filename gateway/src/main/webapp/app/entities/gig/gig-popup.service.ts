@@ -28,8 +28,15 @@ export class GigPopupService {
 
             if (id) {
                 this.gigService.find(id).subscribe((gig) => {
-                    gig.startDate = this.datePipe
-                        .transform(gig.startDate, 'yyyy-MM-ddTHH:mm:ss');
+                    if (gig.startDate) {
+                        gig.startDate = {
+                            year: gig.startDate.getFullYear(),
+                            month: gig.startDate.getMonth() + 1,
+                            day: gig.startDate.getDate()
+                        };
+                    }
+                    gig.startTime = this.datePipe
+                        .transform(gig.startTime, 'yyyy-MM-ddTHH:mm:ss');
                     this.ngbModalRef = this.gigModalRef(component, gig);
                     resolve(this.ngbModalRef);
                 });

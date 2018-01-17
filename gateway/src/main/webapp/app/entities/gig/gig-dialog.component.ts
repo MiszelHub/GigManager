@@ -18,6 +18,7 @@ export class GigDialogComponent implements OnInit {
 
     gig: Gig;
     isSaving: boolean;
+    startDateDp: any;
 
     constructor(
         public activeModal: NgbActiveModal,

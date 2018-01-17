@@ -18,9 +18,10 @@
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="name"><span jhiTranslate="gatewayApp.gig.name">Name</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="startDate"><span jhiTranslate="gatewayApp.gig.startDate">Start Date</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="isCancelled"><span jhiTranslate="gatewayApp.gig.isCancelled">Is Cancelled</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="ticketPrice"><span jhiTranslate="gatewayApp.gig.ticketPrice">Ticket Price</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="startDate"><span jhiTranslate="gatewayApp.gig.startDate">Start Date</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="startTime"><span jhiTranslate="gatewayApp.gig.startTime">Start Time</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -28,9 +29,10 @@
             <tr *ngFor="let gig of gigs ;trackBy: trackId">
                 <td><a [routerLink]="['../gig', gig.id ]">{{gig.id}}</a></td>
                 <td>{{gig.name}}</td>
-                <td>{{gig.startDate | date:'medium'}}</td>
                 <td>{{gig.isCancelled}}</td>
                 <td>{{gig.ticketPrice}}</td>
+                <td>{{gig.startDate | date:'mediumDate'}}</td>
+                <td>{{gig.startTime | date:'medium'}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
