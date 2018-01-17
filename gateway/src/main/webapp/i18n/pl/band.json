@@ -1,0 +1,29 @@
+{
+    "gatewayApp": {
+        "band" : {
+            "home": {
+                "title": "Bands",
+                "createLabel": "Dodaj Band",
+                "createOrEditLabel": "Dodaj lub edytuj: Band"
+            },
+            "delete": {
+                "question": "Czy na pewno chcesz usunąć Band {{ id }}?"
+            },
+            "detail": {
+                "title": "Band"
+            },
+            "name": "Name",
+            "origin": "Origin",
+            "genre": "Genre",
+            "dateOfFormation": "Date Of Formation",
+            "bio": "Bio"
+        }
+    },
+    "bandserviceApp": {
+        "band" : {
+            "created": "Utworzono nowy Band z identyfikatorem {{ param }}",
+            "updated": "Uaktualniono Band z identyfikatorem {{ param }}",
+            "deleted": "Usunięto Band z identyfikatorem {{ param }}"
+        }
+    }
+}

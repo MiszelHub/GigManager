@@ -3,7 +3,7 @@
     "promptValues": {
       "packageName": "com.gigmanager.gateway",
       "nativeLanguage": "en",
-      "microservicePath": "../gig-service"
+      "microservicePath": "../band-service"
     },
     "jhipsterVersion": "4.13.1",
     "baseName": "gateway",

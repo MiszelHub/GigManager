@@ -1,0 +1,49 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "100"
+        },
+        {
+            "fieldName": "origin",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "genre",
+            "fieldType": "MusicGenre",
+            "fieldValues": "Rock,HardRock,Metal,HeavyMetal",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "dateOfFormation",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "bio",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": "512"
+        }
+    ],
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "band",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination",
+    "microserviceName": "bandservice",
+    "searchEngine": false
+}

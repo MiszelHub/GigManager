@@ -8,6 +8,7 @@
             "entities": {
                 "main": "Entities",
                 "gig": "Gig",
+                "band": "Band",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
