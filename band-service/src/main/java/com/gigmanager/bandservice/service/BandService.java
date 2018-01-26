@@ -35,10 +35,10 @@ public class BandService {
     }
 
     /**
-     * Get all the bands.
+     *  Get all the bands.
      *
-     * @param pageable the pagination information
-     * @return the list of entities
+     *  @param pageable the pagination information
+     *  @return the list of entities
      */
     public Page<Band> findAll(Pageable pageable) {
         log.debug("Request to get all Bands");
@@ -46,10 +46,10 @@ public class BandService {
     }
 
     /**
-     * Get one band by id.
+     *  Get one band by id.
      *
-     * @param id the id of the entity
-     * @return the entity
+     *  @param id the id of the entity
+     *  @return the entity
      */
     public Band findOne(String id) {
         log.debug("Request to get Band : {}", id);
@@ -57,9 +57,9 @@ public class BandService {
     }
 
     /**
-     * Delete the band by id.
+     *  Delete the  band by id.
      *
-     * @param id the id of the entity
+     *  @param id the id of the entity
      */
     public void delete(String id) {
         log.debug("Request to delete Band : {}", id);

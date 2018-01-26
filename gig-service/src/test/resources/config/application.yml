@@ -16,7 +16,7 @@
 
 spring:
     application:
-        name: gigservice
+        bandName: gigservice
     jackson:
         serialization.write_dates_as_timestamps: false
     data:

@@ -6,7 +6,7 @@
     <artifactId>gigservice</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>Gigservice</name>
+    <bandName>Gigservice</bandName>
 
     <properties>
         <!-- Build properties -->

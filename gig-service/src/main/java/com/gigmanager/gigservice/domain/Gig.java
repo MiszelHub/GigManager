@@ -41,6 +41,10 @@ public class Gig implements Serializable {
     @Field("start_time")
     private Instant startTime;
 
+    @NotNull
+    @Field("bands")
+    private Band bandsAttendingGig;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public String getId() {
         return id;
@@ -146,5 +150,13 @@ public class Gig implements Serializable {
             ", startDate='" + getStartDate() + "'" +
             ", startTime='" + getStartTime() + "'" +
             "}";
+    }
+
+    public Band getBandsAttendingGig() {
+        return bandsAttendingGig;
+    }
+
+    public void setBandsAttendingGig(Band bandsAttendingGig) {
+        this.bandsAttendingGig = bandsAttendingGig;
     }
 }

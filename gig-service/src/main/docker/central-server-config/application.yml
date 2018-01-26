@@ -1,5 +1,5 @@
 configserver:
-    name: Docker Consul Service
+    bandName: Docker Consul Service
     status: Connected to Consul Server running in Docker
 
 jhipster:

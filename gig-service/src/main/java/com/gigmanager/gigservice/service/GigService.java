@@ -1,12 +1,19 @@
 package com.gigmanager.gigservice.service;
 
+import com.gigmanager.gigservice.client.BandClient;
+import com.gigmanager.gigservice.domain.Band;
 import com.gigmanager.gigservice.domain.Gig;
 import com.gigmanager.gigservice.repository.GigRepository;
+import com.gigmanager.gigservice.security.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 /**
@@ -19,8 +26,12 @@ public class GigService {
 
     private final GigRepository gigRepository;
 
-    public GigService(GigRepository gigRepository) {
+    private final BandClient bandClient;
+
+    @Autowired
+    public GigService(GigRepository gigRepository, BandClient bandClient) {
         this.gigRepository = gigRepository;
+        this.bandClient = bandClient;
     }
 
     /**
@@ -31,6 +42,8 @@ public class GigService {
      */
     public Gig save(Gig gig) {
         log.debug("Request to save Gig : {}", gig);
+        Band band = bandClient.findBandByUserId(SecurityUtils.getCurrentUserLogin().get());
+        gig.setBandsAttendingGig(band);
         return gigRepository.save(gig);
     }
 
@@ -54,6 +67,14 @@ public class GigService {
     public Gig findOne(String id) {
         log.debug("Request to get Gig : {}", id);
         return gigRepository.findOne(id);
+    }
+
+    public List<Gig> findGigsOfTheBand(String bandId) {
+        return gigRepository.findAll()
+            .stream()
+            .filter(x -> x.getBandsAttendingGig().stream()
+                .anyMatch(y -> y.getId().equals(bandId)))
+            .collect(Collectors.toList());
     }
 
     /**

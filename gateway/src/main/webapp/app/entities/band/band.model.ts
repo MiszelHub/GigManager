@@ -8,6 +8,7 @@ export class Band implements BaseEntity {
         public genre?: any,
         public dateOfFormation?: any,
         public bio?: string,
+        public accountId?: string,
     ) {
     }
 }

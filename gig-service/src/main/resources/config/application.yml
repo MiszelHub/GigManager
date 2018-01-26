@@ -39,12 +39,12 @@ management:
             enabled: false # When using the MailService, configure an SMTP server and set this to true
 spring:
     application:
-        name: gigservice
+        bandName: gigservice
     cloud:
         consul:
             discovery:
                 healthCheckPath: /management/health
-                instanceId: ${spring.application.name}:${spring.application.instance-id:${random.value}}
+                instanceId: ${spring.application.bandName}:${spring.application.instance-id:${random.value}}
     jackson:
         serialization.write_dates_as_timestamps: false
     messages:
@@ -97,7 +97,7 @@ jhipster:
         description: gigservice API documentation
         version: 0.0.1
         terms-of-service-url:
-        contact-name:
+        contact-bandName:
         contact-url:
         contact-email:
         license:

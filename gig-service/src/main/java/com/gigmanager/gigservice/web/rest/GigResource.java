@@ -92,6 +92,7 @@ public class GigResource {
     @Timed
     public ResponseEntity<List<Gig>> getAllGigs(Pageable pageable) {
         log.debug("REST request to get a page of Gigs");
+
         Page<Gig> page = gigService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/gigs");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
