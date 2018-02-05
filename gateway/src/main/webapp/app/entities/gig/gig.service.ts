@@ -2,12 +2,9 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { SERVER_API_URL } from '../../app.constants';
-
 import { JhiDateUtils } from 'ng-jhipster';
-
 import { Gig } from './gig.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
-
 @Injectable()
 export class GigService {
 
@@ -64,8 +61,8 @@ export class GigService {
         const entity: Gig = Object.assign(new Gig(), json);
         entity.startDate = this.dateUtils
             .convertLocalDateFromServer(json.startDate);
-        entity.startTime = this.dateUtils
-            .convertDateTimeFromServer(json.startTime);
+       // entity.startTime = this.dateUtils
+         //   .convertDateTimeFromServer(json.startTime);
         return entity;
     }
 
@@ -77,7 +74,7 @@ export class GigService {
         copy.startDate = this.dateUtils
             .convertLocalDateToServer(gig.startDate);
 
-        copy.startTime = this.dateUtils.toDate(gig.startTime);
+       // copy.startTime = this.dateUtils.toDate(gig.startTime);
         return copy;
     }
 }

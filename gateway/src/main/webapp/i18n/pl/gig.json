@@ -2,28 +2,28 @@
     "gatewayApp": {
         "gig" : {
             "home": {
-                "title": "Gigs",
-                "createLabel": "Dodaj Gig",
-                "createOrEditLabel": "Dodaj lub edytuj: Gig"
+                "title": "Koncerty",
+                "createLabel": "Dodaj koncert",
+                "createOrEditLabel": "Dodaj lub edytuj: koncert"
             },
             "delete": {
-                "question": "Czy na pewno chcesz usunąć Gig {{ id }}?"
+                "question": "Czy na pewno chcesz usunąć koncert {{ id }}?"
             },
             "detail": {
-                "title": "Gig"
+                "title": "Koncert"
             },
-            "name": "Name",
-            "isCancelled": "Is Cancelled",
-            "ticketPrice": "Ticket Price",
-            "startDate": "Start Date",
-            "startTime": "Start Time"
+            "name": "Nazwa",
+            "isCancelled": "Owołany",
+            "ticketPrice": "Cena biletu",
+            "startDate": "Data rozpoczęcia",
+            "startTime": "Czas ropzpoczęcia"
         }
     },
     "gigserviceApp": {
         "gig" : {
-            "created": "Utworzono nowy Gig z identyfikatorem {{ param }}",
-            "updated": "Uaktualniono Gig z identyfikatorem {{ param }}",
-            "deleted": "Usunięto Gig z identyfikatorem {{ param }}"
+            "created": "Utworzono nowy koncert z identyfikatorem {{ param }}",
+            "updated": "Uaktualniono koncert z identyfikatorem {{ param }}",
+            "deleted": "Usunięto koncert z identyfikatorem {{ param }}"
         }
     }
 }

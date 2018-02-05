@@ -7,7 +7,7 @@ export class Gig implements BaseEntity {
         public isCancelled?: boolean,
         public ticketPrice?: number,
         public startDate?: any,
-        public startTime?: any,
+        public startTime?: string,
     ) {
         this.isCancelled = false;
     }

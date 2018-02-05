@@ -2,28 +2,28 @@
     "gatewayApp": {
         "band" : {
             "home": {
-                "title": "Bands",
-                "createLabel": "Dodaj Band",
-                "createOrEditLabel": "Dodaj lub edytuj: Band"
+                "title": "Zespoły",
+                "createLabel": "Dodaj Zespół",
+                "createOrEditLabel": "Dodaj lub edytuj: Zespół"
             },
             "delete": {
-                "question": "Czy na pewno chcesz usunąć Band {{ id }}?"
+                "question": "Czy na pewno chcesz usunąć Zespół {{ id }}?"
             },
             "detail": {
-                "title": "Band"
+                "title": "Zespół"
             },
-            "name": "Name",
-            "origin": "Origin",
-            "genre": "Genre",
-            "dateOfFormation": "Date Of Formation",
+            "name": "Nazwa",
+            "origin": "Miejsce powstania",
+            "genre": "Gatunek Muzyki",
+            "dateOfFormation": "Data utowrzenia",
             "bio": "Bio"
         }
     },
     "bandserviceApp": {
         "band" : {
-            "created": "Utworzono nowy Band z identyfikatorem {{ param }}",
-            "updated": "Uaktualniono Band z identyfikatorem {{ param }}",
-            "deleted": "Usunięto Band z identyfikatorem {{ param }}"
+            "created": "Utworzono nowy zespół z identyfikatorem {{ param }}",
+            "updated": "Uaktualniono zespół z identyfikatorem {{ param }}",
+            "deleted": "Usunięto zespół z identyfikatorem {{ param }}"
         }
     }
 }
