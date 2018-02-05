@@ -57,9 +57,6 @@ public class BandResourceIntTest {
     private static final String DEFAULT_BIO = "AAAAAAAAAA";
     private static final String UPDATED_BIO = "BBBBBBBBBB";
 
-    private static final String DEFAULT_ACCOUNT_ID = "AAAAAAAAAA";
-    private static final String UPDATED_ACCOUNT_ID = "BBBBBBBBBB";
-
     @Autowired
     private BandRepository bandRepository;
 
@@ -102,8 +99,7 @@ public class BandResourceIntTest {
             .origin(DEFAULT_ORIGIN)
             .genre(DEFAULT_GENRE)
             .dateOfFormation(DEFAULT_DATE_OF_FORMATION)
-            .bio(DEFAULT_BIO)
-            .accountId(DEFAULT_ACCOUNT_ID);
+            .bio(DEFAULT_BIO);
         return band;
     }
 
@@ -132,7 +128,6 @@ public class BandResourceIntTest {
         assertThat(testBand.getGenre()).isEqualTo(DEFAULT_GENRE);
         assertThat(testBand.getDateOfFormation()).isEqualTo(DEFAULT_DATE_OF_FORMATION);
         assertThat(testBand.getBio()).isEqualTo(DEFAULT_BIO);
-        assertThat(testBand.getAccountId()).isEqualTo(DEFAULT_ACCOUNT_ID);
     }
 
     @Test
@@ -205,23 +200,6 @@ public class BandResourceIntTest {
     }
 
     @Test
-    public void checkAccountIdIsRequired() throws Exception {
-        int databaseSizeBeforeTest = bandRepository.findAll().size();
-        // set the field null
-        band.setAccountId(null);
-
-        // Create the Band, which fails.
-
-        restBandMockMvc.perform(post("/api/bands")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(band)))
-            .andExpect(status().isBadRequest());
-
-        List<Band> bandList = bandRepository.findAll();
-        assertThat(bandList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
     public void getAllBands() throws Exception {
         // Initialize the database
         bandRepository.save(band);
@@ -235,8 +213,7 @@ public class BandResourceIntTest {
             .andExpect(jsonPath("$.[*].origin").value(hasItem(DEFAULT_ORIGIN.toString())))
             .andExpect(jsonPath("$.[*].genre").value(hasItem(DEFAULT_GENRE.toString())))
             .andExpect(jsonPath("$.[*].dateOfFormation").value(hasItem(DEFAULT_DATE_OF_FORMATION.toString())))
-            .andExpect(jsonPath("$.[*].bio").value(hasItem(DEFAULT_BIO.toString())))
-            .andExpect(jsonPath("$.[*].accountId").value(hasItem(DEFAULT_ACCOUNT_ID.toString())));
+            .andExpect(jsonPath("$.[*].bio").value(hasItem(DEFAULT_BIO.toString())));
     }
 
     @Test
@@ -253,8 +230,7 @@ public class BandResourceIntTest {
             .andExpect(jsonPath("$.origin").value(DEFAULT_ORIGIN.toString()))
             .andExpect(jsonPath("$.genre").value(DEFAULT_GENRE.toString()))
             .andExpect(jsonPath("$.dateOfFormation").value(DEFAULT_DATE_OF_FORMATION.toString()))
-            .andExpect(jsonPath("$.bio").value(DEFAULT_BIO.toString()))
-            .andExpect(jsonPath("$.accountId").value(DEFAULT_ACCOUNT_ID.toString()));
+            .andExpect(jsonPath("$.bio").value(DEFAULT_BIO.toString()));
     }
 
     @Test
@@ -278,8 +254,7 @@ public class BandResourceIntTest {
             .origin(UPDATED_ORIGIN)
             .genre(UPDATED_GENRE)
             .dateOfFormation(UPDATED_DATE_OF_FORMATION)
-            .bio(UPDATED_BIO)
-            .accountId(UPDATED_ACCOUNT_ID);
+            .bio(UPDATED_BIO);
 
         restBandMockMvc.perform(put("/api/bands")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -295,7 +270,6 @@ public class BandResourceIntTest {
         assertThat(testBand.getGenre()).isEqualTo(UPDATED_GENRE);
         assertThat(testBand.getDateOfFormation()).isEqualTo(UPDATED_DATE_OF_FORMATION);
         assertThat(testBand.getBio()).isEqualTo(UPDATED_BIO);
-        assertThat(testBand.getAccountId()).isEqualTo(UPDATED_ACCOUNT_ID);
     }
 
     @Test

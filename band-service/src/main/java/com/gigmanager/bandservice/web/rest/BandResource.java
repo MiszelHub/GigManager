@@ -6,7 +6,6 @@ import com.gigmanager.bandservice.service.BandService;
 import com.gigmanager.bandservice.web.rest.errors.BadRequestAlertException;
 import com.gigmanager.bandservice.web.rest.util.HeaderUtil;
 import com.gigmanager.bandservice.web.rest.util.PaginationUtil;
-import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -91,7 +90,7 @@ public class BandResource {
      */
     @GetMapping("/bands")
     @Timed
-    public ResponseEntity<List<Band>> getAllBands(@ApiParam Pageable pageable) {
+    public ResponseEntity<List<Band>> getAllBands(Pageable pageable) {
         log.debug("REST request to get a page of Bands");
         Page<Band> page = bandService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/bands");

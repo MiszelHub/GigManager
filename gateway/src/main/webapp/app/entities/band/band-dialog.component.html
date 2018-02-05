@@ -70,17 +70,6 @@
                 </small>
             </div>
         </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="gatewayApp.band.accountId" for="field_accountId">Account Id</label>
-            <input type="text" class="form-control" name="accountId" id="field_accountId"
-                [(ngModel)]="band.accountId" required/>
-            <div [hidden]="!(editForm.controls.accountId?.dirty && editForm.controls.accountId?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.accountId?.errors?.required" jhiTranslate="entity.validation.required">
-                   This field is required.
-                </small>
-            </div>
-        </div>
 
     </div>
     <div class="modal-footer">

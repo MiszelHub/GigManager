@@ -1,10 +1,10 @@
 package com.gigmanager.bandservice.domain;
 
-
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.Document;
 import javax.validation.constraints.*;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -18,6 +18,7 @@ import com.gigmanager.bandservice.domain.enumeration.MusicGenre;
 public class Band implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @Id
     private String id;
 
@@ -40,10 +41,6 @@ public class Band implements Serializable {
     @Size(max = 512)
     @Field("bio")
     private String bio;
-
-    @NotNull
-    @Field("account_id")
-    private String accountId;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public String getId() {
@@ -118,19 +115,6 @@ public class Band implements Serializable {
     public void setBio(String bio) {
         this.bio = bio;
     }
-
-    public String getAccountId() {
-        return accountId;
-    }
-
-    public Band accountId(String accountId) {
-        this.accountId = accountId;
-        return this;
-    }
-
-    public void setAccountId(String accountId) {
-        this.accountId = accountId;
-    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -162,7 +146,6 @@ public class Band implements Serializable {
             ", genre='" + getGenre() + "'" +
             ", dateOfFormation='" + getDateOfFormation() + "'" +
             ", bio='" + getBio() + "'" +
-            ", accountId='" + getAccountId() + "'" +
             "}";
     }
 }

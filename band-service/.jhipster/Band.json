@@ -37,13 +37,6 @@
                 "maxlength"
             ],
             "fieldValidateRulesMaxlength": "512"
-        },
-        {
-            "fieldName": "accountId",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
         }
     ],
     "dto": "no",

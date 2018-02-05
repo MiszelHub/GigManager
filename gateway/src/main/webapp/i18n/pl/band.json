@@ -16,8 +16,7 @@
             "origin": "Origin",
             "genre": "Genre",
             "dateOfFormation": "Date Of Formation",
-            "bio": "Bio",
-            "accountId": "Account Id"
+            "bio": "Bio"
         }
     },
     "bandserviceApp": {
