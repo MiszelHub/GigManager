@@ -1,14 +1,14 @@
 package com.gigmanager.gigservice.domain;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.Document;
-import javax.validation.constraints.*;
+import org.springframework.data.mongodb.core.mapping.Field;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Objects;
 
 /**
@@ -39,7 +39,10 @@ public class Gig implements Serializable {
 
     @NotNull
     @Field("start_time")
-    private Instant startTime;
+    private LocalTime startTime;
+
+    //@Field("user_name")
+    private String userName;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public String getId() {
@@ -54,13 +57,13 @@ public class Gig implements Serializable {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Gig name(String name) {
         this.name = name;
         return this;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public Boolean isIsCancelled() {
@@ -80,17 +83,21 @@ public class Gig implements Serializable {
         return ticketPrice;
     }
 
+    public void setTicketPrice(BigDecimal ticketPrice) {
+        this.ticketPrice = ticketPrice;
+    }
+
     public Gig ticketPrice(BigDecimal ticketPrice) {
         this.ticketPrice = ticketPrice;
         return this;
     }
 
-    public void setTicketPrice(BigDecimal ticketPrice) {
-        this.ticketPrice = ticketPrice;
-    }
-
     public LocalDate getStartDate() {
         return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
     }
 
     public Gig startDate(LocalDate startDate) {
@@ -98,21 +105,17 @@ public class Gig implements Serializable {
         return this;
     }
 
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
-
-    public Instant getStartTime() {
+    public LocalTime getStartTime() {
         return startTime;
     }
 
-    public Gig startTime(Instant startTime) {
+    public void setStartTime(LocalTime startTime) {
         this.startTime = startTime;
-        return this;
     }
 
-    public void setStartTime(Instant startTime) {
+    public Gig startTime(LocalTime startTime) {
         this.startTime = startTime;
+        return this;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -146,5 +149,13 @@ public class Gig implements Serializable {
             ", startDate='" + getStartDate() + "'" +
             ", startTime='" + getStartTime() + "'" +
             "}";
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

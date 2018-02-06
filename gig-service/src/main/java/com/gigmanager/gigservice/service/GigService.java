@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 
 /**
  * Service Implementation for managing Gig.
@@ -64,5 +66,9 @@ public class GigService {
     public void delete(String id) {
         log.debug("Request to delete Gig : {}", id);
         gigRepository.delete(id);
+    }
+
+    public Page<Gig> findAllUserGigs(Pageable pageable, String currentUserLogin) {
+        return gigRepository.findAllByUserName(pageable, currentUserLogin);
     }
 }

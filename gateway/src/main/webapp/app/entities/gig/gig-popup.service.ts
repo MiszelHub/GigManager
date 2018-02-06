@@ -35,8 +35,8 @@ export class GigPopupService {
                             day: gig.startDate.getDate()
                         };
                     }
-                    gig.startTime = this.datePipe
-                        .transform(gig.startTime, 'yyyy-MM-ddTHH:mm:ss');
+                    // gig.startTime = this.datePipe
+                    //     .transform(gig.startTime, 'yyyy-MM-ddTHH:mm:ss');
                     this.ngbModalRef = this.gigModalRef(component, gig);
                     resolve(this.ngbModalRef);
                 });

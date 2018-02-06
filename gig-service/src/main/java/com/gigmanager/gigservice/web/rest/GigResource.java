@@ -2,6 +2,8 @@ package com.gigmanager.gigservice.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.gigmanager.gigservice.domain.Gig;
+import com.gigmanager.gigservice.security.AuthoritiesConstants;
+import com.gigmanager.gigservice.security.SecurityUtils;
 import com.gigmanager.gigservice.service.GigService;
 import com.gigmanager.gigservice.web.rest.errors.BadRequestAlertException;
 import com.gigmanager.gigservice.web.rest.util.HeaderUtil;
@@ -19,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -30,10 +31,8 @@ import java.util.Optional;
 @RequestMapping("/api")
 public class GigResource {
 
-    private final Logger log = LoggerFactory.getLogger(GigResource.class);
-
     private static final String ENTITY_NAME = "gig";
-
+    private final Logger log = LoggerFactory.getLogger(GigResource.class);
     private final GigService gigService;
 
     public GigResource(GigService gigService) {
@@ -54,6 +53,10 @@ public class GigResource {
         if (gig.getId() != null) {
             throw new BadRequestAlertException("A new gig cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        Optional<String> currentUserLogin = SecurityUtils.getCurrentUserLogin();
+
+        currentUserLogin.ifPresent(gig::setUserName);
+
         Gig result = gigService.save(gig);
         return ResponseEntity.created(new URI("/api/gigs/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -92,7 +95,14 @@ public class GigResource {
     @Timed
     public ResponseEntity<List<Gig>> getAllGigs(Pageable pageable) {
         log.debug("REST request to get a page of Gigs");
-        Page<Gig> page = gigService.findAll(pageable);
+
+        Page<Gig> page = null;
+        if (SecurityUtils.isCurrentUserInRole(AuthoritiesConstants.ADMIN)) {
+            page = gigService.findAll(pageable);
+
+        } else if(SecurityUtils.isCurrentUserInRole(AuthoritiesConstants.USER)){
+            page = gigService.findAllUserGigs(pageable,SecurityUtils.getCurrentUserLogin().orElseGet(null));
+        }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/gigs");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
