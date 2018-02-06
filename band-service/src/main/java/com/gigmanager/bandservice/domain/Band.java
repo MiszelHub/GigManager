@@ -42,6 +42,8 @@ public class Band implements Serializable {
     @Field("bio")
     private String bio;
 
+    private String userName;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public String getId() {
         return id;
@@ -147,5 +149,13 @@ public class Band implements Serializable {
             ", dateOfFormation='" + getDateOfFormation() + "'" +
             ", bio='" + getBio() + "'" +
             "}";
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

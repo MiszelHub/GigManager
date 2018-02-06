@@ -1,7 +1,6 @@
 import { Injectable, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { DatePipe } from '@angular/common';
 import { Gig } from './gig.model';
 import { GigService } from './gig.service';
 
@@ -10,7 +9,7 @@ export class GigPopupService {
     private ngbModalRef: NgbModalRef;
 
     constructor(
-        private datePipe: DatePipe,
+        // private datePipe: DatePipe,
         private modalService: NgbModal,
         private router: Router,
         private gigService: GigService

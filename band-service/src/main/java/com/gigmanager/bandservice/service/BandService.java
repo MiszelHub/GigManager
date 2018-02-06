@@ -65,4 +65,8 @@ public class BandService {
         log.debug("Request to delete Band : {}", id);
         bandRepository.delete(id);
     }
+
+    public Page<Band> findUserBands(Pageable pageable, String currentUserLogin) {
+        return bandRepository.findAllByUserName(pageable, currentUserLogin);
+    }
 }

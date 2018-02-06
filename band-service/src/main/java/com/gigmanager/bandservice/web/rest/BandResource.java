@@ -2,6 +2,8 @@ package com.gigmanager.bandservice.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.gigmanager.bandservice.domain.Band;
+import com.gigmanager.bandservice.security.AuthoritiesConstants;
+import com.gigmanager.bandservice.security.SecurityUtils;
 import com.gigmanager.bandservice.service.BandService;
 import com.gigmanager.bandservice.web.rest.errors.BadRequestAlertException;
 import com.gigmanager.bandservice.web.rest.util.HeaderUtil;
@@ -19,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -30,10 +31,8 @@ import java.util.Optional;
 @RequestMapping("/api")
 public class BandResource {
 
-    private final Logger log = LoggerFactory.getLogger(BandResource.class);
-
     private static final String ENTITY_NAME = "band";
-
+    private final Logger log = LoggerFactory.getLogger(BandResource.class);
     private final BandService bandService;
 
     public BandResource(BandService bandService) {
@@ -51,12 +50,15 @@ public class BandResource {
     @Timed
     public ResponseEntity<Band> createBand(@Valid @RequestBody Band band) throws URISyntaxException {
         log.debug("REST request to save Band : {}", band);
+
         if (band.getId() != null) {
             throw new BadRequestAlertException("A new band cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        SecurityUtils.getCurrentUserLogin().ifPresent(band::setUserName);
+
         Band result = bandService.save(band);
         return ResponseEntity.created(new URI("/api/bands/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId()))
             .body(result);
     }
 
@@ -78,7 +80,7 @@ public class BandResource {
         }
         Band result = bandService.save(band);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, band.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, band.getId()))
             .body(result);
     }
 
@@ -92,7 +94,13 @@ public class BandResource {
     @Timed
     public ResponseEntity<List<Band>> getAllBands(Pageable pageable) {
         log.debug("REST request to get a page of Bands");
-        Page<Band> page = bandService.findAll(pageable);
+        Page<Band> page = null;
+        if (SecurityUtils.isCurrentUserInRole(AuthoritiesConstants.ADMIN)) {
+
+            page = bandService.findAll(pageable);
+        } else if (SecurityUtils.isCurrentUserInRole(AuthoritiesConstants.USER)) {
+            page = bandService.findUserBands(pageable,SecurityUtils.getCurrentUserLogin().orElseGet(null));
+        }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/bands");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
